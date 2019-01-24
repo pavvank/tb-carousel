@@ -200,14 +200,21 @@ export class AppComponent implements OnInit {
 |--------------|----------------|----|
 |**displayData**|||
 | **visibleCards** | | |
-|**orientaion**|||
+|**orientation**|||
 |**component**|||
-|--------------|----------------|----|
+|**cardHeight**|||
+|**cardWidth**|||
+|**cardColor**|||
 | **dataType** | image | |
 |  | text | |
 |  | header-text | |
 |  | custom-component | |
-
+|**containerHeight**|||
+|**containerWidth**|||
+|**containerMargin**|||
+|**imageMaxHeight**|||
+|**imageMaxWidth**|||
+|**imageBorderRadius**|||
 
 ---
 ### **Development**
