@@ -198,11 +198,23 @@ export class AppComponent implements OnInit {
 ### **Poperties of the carousel for data-binding**
 |Property Name | Possibe Values |Note|
 |--------------|----------------|----|
+|**displayData**|||
+| **visibleCards** | | |
+|**orientation**|||
+|**component**|||
+|**cardHeight**|||
+|**cardWidth**|||
+|**cardColor**|||
 | **dataType** | image | |
 |  | text | |
 |  | header-text | |
 |  | custom-component | |
-| **visibleCards** | | |
+|**containerHeight**|||
+|**containerWidth**|||
+|**containerMargin**|||
+|**imageMaxHeight**|||
+|**imageMaxWidth**|||
+|**imageBorderRadius**|||
 
 ---
 ### **Development**

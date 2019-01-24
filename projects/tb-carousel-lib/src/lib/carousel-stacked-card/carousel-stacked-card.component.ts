@@ -19,6 +19,7 @@ import { ComponentGenFactoryService } from '../util/component-gen-factory.servic
   styleUrls: ['./carousel-stacked-card.component.css']
 })
 export class TbCarouselStackedCardComponent implements OnInit, AfterViewInit {
+
   marginLeft: string;
 
   marginTop: string;
@@ -46,14 +47,14 @@ export class TbCarouselStackedCardComponent implements OnInit, AfterViewInit {
   @Input('component') component: number = 0;
 
   /*Card Style properties*/
-  @Input('cardHeight') heightOfBox: string = "200px";
-  @Input('cardWidth') widthOfBox: string = "300px";
+  @Input('cardHeight') heightOfBox: string = "300px";
+  @Input('cardWidth') widthOfBox: string = "500px";
   @Input('dataType') dataType: string = 'text';
-  @Input('cardColor') cardColor: string = "blue";
+  @Input('cardColor') cardColor: string = "white";
 
   /*Container properties */
-  @Input('containerHeight') containerHeight;
-  @Input('containerWidth') containerWidth;
+  @Input('containerHeight') containerHeight = "0px";
+  @Input('containerWidth') containerWidth = "0px";
   @Input('containerMargin') containerMargin = "0px";
 
   /*Image properties */
@@ -69,16 +70,7 @@ export class TbCarouselStackedCardComponent implements OnInit, AfterViewInit {
 
   @Input('imageBorderRadius') imageBorderRadius = "20px";
 
-  @Input('imageMarginSide') imageMarginSide = this.utility.getNumberAndUnit(this.widthOfBox).unit == "%" ? "5%" :
-    (this.utility.getNumberAndUnit(this.widthOfBox).value * 0.05) +
-    this.utility.getNumberAndUnit(this.widthOfBox).unit;
-
-  @Input('imageMarginTop') imageMarginTop = this.utility.getNumberAndUnit(this.heightOfBox).unit == "%" ? "2%" :
-    (this.utility.getNumberAndUnit(this.heightOfBox).value * 0.05) +
-    this.utility.getNumberAndUnit(this.heightOfBox).unit;
-
-  @Input('imageHeight') imageHeight = 0;
-  @Input('imageWidth') imageWidth = 0;
+  /**Methods*/
 
   @ViewChildren('customComponent', { read: ViewContainerRef }) public widgetTargets: QueryList<ViewContainerRef>;
 
