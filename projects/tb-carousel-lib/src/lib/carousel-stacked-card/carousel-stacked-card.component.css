@@ -1,0 +1,37 @@
+.common-card {
+    border: 2px solid black;
+    border-radius: 30px;
+    position: absolute;
+    text-align: center;
+    transform-style: preserve-3d;
+    box-shadow: 5px 5px 50px black;
+    transition: left 1s, transform 1s, top 1s;
+    animation-name: animationName;
+    animation-duration: 1s;
+}
+
+@keyframes animationName {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1.0;
+    }
+}
+
+.tb-button-left {
+    z-index: 100;
+    position: absolute;
+    left: 5%;
+    top: 50%;
+}
+
+.tb-button-right {
+    z-index: 100;
+    position: absolute;
+    right: 5%;
+    top: 50%;
+}

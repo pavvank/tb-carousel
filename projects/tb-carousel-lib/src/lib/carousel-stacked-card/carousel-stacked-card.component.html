@@ -1,0 +1,27 @@
+<div [ngStyle]="{'height' : containerHeight, 'width' : containerWidth,
+  'position' : 'relative'}">
+  <div class="common-card" *ngFor="let block of data; let i = index;" 
+  [ngStyle]="{'z-index': cssStylesArray[i].zIndex, 'left': cssStylesArray[i].left,
+  'transform': cssStylesArray[i].scale, 'display' : cssStylesArray[i].display,
+  'height' : heightOfBox, 'width' : widthOfBox, 'margin-left' : marginLeft, 'background-color' : cardColor,
+  'top' : cssStylesArray[i].top, 'margin-top' : marginTop}">
+
+    <div *ngIf="dataType=='custom-component'">
+      <template #customComponent></template>
+    </div>
+    <div *ngIf="dataType=='image'">
+      <img [src]="utility.sanitizeUrl(block)" alt="Image {{block}}" 
+        [ngStyle]="{'max-height': imageMaxHeight, 'max-width': imageMaxWidth,
+        'margin-top' : imageMarginTop, 'border-radius': imageBorderRadius }">
+    </div>
+    <div *ngIf="dataType=='header-text'">
+      <h2>{{block.heading}}</h2>
+      <p>{{block.content}}</p>
+    </div>
+
+  </div>
+
+  <button (click)="moveNext()" class="tb-button-right">Next</button>
+  <button (click)="movePrevious()" class="tb-button-left">Previous</button>
+
+</div>
