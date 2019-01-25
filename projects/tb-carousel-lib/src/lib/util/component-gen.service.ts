@@ -1,5 +1,4 @@
 import {
-  Injectable,
   ViewContainerRef,
   ComponentFactoryResolver,
   Optional
@@ -11,15 +10,12 @@ export class ComponentGenServiceConfig {
 }
 
 
-@Injectable({
-  providedIn: 'root'
-})
 export class ComponentGenService {
 
   _userDefinedComp = TbCarouselLibComponent;
 
-  constructor(private resolver: ComponentFactoryResolver, @Optional() config: ComponentGenServiceConfig,
-    componentId: number) {
+  constructor(componentId : number, private resolver: ComponentFactoryResolver, 
+    @Optional() config: ComponentGenServiceConfig) {
     if (config) { this._userDefinedComp = config[componentId].userDefinedComp; }
   }
 
@@ -31,3 +27,4 @@ export class ComponentGenService {
   }
 
 }
+

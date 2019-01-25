@@ -2,8 +2,9 @@ import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core
 import { TbCarouselLibComponent } from './carousel-lib.component';
 import { TbCarouselStackedCardComponent } from './carousel-stacked-card/carousel-stacked-card.component';
 import { CommonModule } from '@angular/common';
-import { ComponentGenService, ComponentGenServiceConfig } from './util/component-gen.service';
+import { ComponentGenServiceConfig } from './util/component-gen.service';
 import { UtilitiesService } from './util/utilities.service';
+import { ComponentGenFactoryService } from './util/component-gen-factory.service';
 
 @NgModule({
   declarations: [
@@ -18,8 +19,8 @@ import { UtilitiesService } from './util/utilities.service';
     TbCarouselStackedCardComponent
   ],
   providers: [
-    ComponentGenService,
-    UtilitiesService
+    UtilitiesService,
+    ComponentGenFactoryService
   ]
 })
 export class TbCarouselLibModule { 
