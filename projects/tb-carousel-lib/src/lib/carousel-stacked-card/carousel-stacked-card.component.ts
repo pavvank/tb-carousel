@@ -6,7 +6,9 @@ import {
   ViewChildren,
   QueryList,
   AfterViewInit,
-  Input
+  Input,
+  AfterContentChecked,
+  ChangeDetectorRef
 } from '@angular/core';
 import { CardCSS } from '../models/cardcss.model';
 import { ComponentGenService } from '../util/component-gen.service';
@@ -18,10 +20,9 @@ import { ComponentGenFactoryService } from '../util/component-gen-factory.servic
   templateUrl: './carousel-stacked-card.component.html',
   styleUrls: ['./carousel-stacked-card.component.css']
 })
-export class TbCarouselStackedCardComponent implements OnInit, AfterViewInit {
+export class TbCarouselStackedCardComponent implements OnInit, AfterViewInit, AfterContentChecked  {
 
   marginLeft: string;
-
   marginTop: string;
 
   highestZIndex: number = 100;
@@ -45,11 +46,11 @@ export class TbCarouselStackedCardComponent implements OnInit, AfterViewInit {
   @Input('visibleCards') visibleBlocks: number = 5;
   @Input('orientation') orientation: string = "horizontal";
   @Input('component') component: number = 0;
+  @Input('dataType') dataType: string = 'text';
 
   /*Card Style properties*/
-  @Input('cardHeight') heightOfBox: string = "300px";
-  @Input('cardWidth') widthOfBox: string = "500px";
-  @Input('dataType') dataType: string = 'text';
+  @Input('cardHeight') heightOfBox: string = "250px";
+  @Input('cardWidth') widthOfBox: string = "300px";
   @Input('cardColor') cardColor: string = "white";
 
   /*Container properties */
@@ -58,16 +59,8 @@ export class TbCarouselStackedCardComponent implements OnInit, AfterViewInit {
   @Input('containerMargin') containerMargin = "0px";
 
   /*Image properties */
-  @Input('imageMaxHeight') imageMaxHeight =
-    (this.utility.getNumberAndUnit(this.heightOfBox).value
-      - this.utility.getNumberAndUnit(this.heightOfBox).value * 0.1) +
-    this.utility.getNumberAndUnit(this.heightOfBox).unit;
-
-  @Input('imageMaxWidth') imageMaxWidth =
-    (this.utility.getNumberAndUnit(this.widthOfBox).value
-      - this.utility.getNumberAndUnit(this.widthOfBox).value * 0.1) +
-    this.utility.getNumberAndUnit(this.widthOfBox).unit;
-
+  @Input('imageMaxHeight') imageMaxHeight = "0px";
+  @Input('imageMaxWidth') imageMaxWidth = "0px";
   @Input('imageBorderRadius') imageBorderRadius = "20px";
 
   /**Methods*/
@@ -75,14 +68,23 @@ export class TbCarouselStackedCardComponent implements OnInit, AfterViewInit {
   @ViewChildren('customComponent', { read: ViewContainerRef }) public widgetTargets: QueryList<ViewContainerRef>;
 
   constructor(private resolver: ComponentFactoryResolver,
-    private compGenFactoryService: ComponentGenFactoryService, public utility: UtilitiesService) { }
+    private compGenFactoryService: ComponentGenFactoryService, public utility: UtilitiesService,
+    private changeDetector: ChangeDetectorRef) { }
 
   ngAfterViewInit(): void {
     let compGenService: ComponentGenService = this.compGenFactoryService.
       createComponentGenServiceObject(this.component);
-    this.widgetTargets.toArray().forEach(el => {
-      compGenService.createComponent(el, this.componentRef);
-    });
+    // this.widgetTargets.toArray().forEach(el => {
+    //   compGenService.createComponent(el, this.componentRef, this.data[0]);
+    // });
+    for(let i =0; i < this.widgetTargets.toArray().length; i++){
+      compGenService.createComponent(this.widgetTargets.toArray()[i], this.componentRef, this.data[i]);
+    }
+    this.changeDetector.detectChanges();
+  }
+
+  ngAfterContentChecked(): void {
+    
   }
 
 
@@ -92,6 +94,9 @@ export class TbCarouselStackedCardComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit(): void {
+
+    this.visibleBlocks = this.data.length < this.visibleBlocks ? this.data.length : this.visibleBlocks;
+
     if (this.orientation == "horizontal") {
       this.centerPosition = 50;
       this.marginLeft = "-" + Math.floor(this.utility.getNumberAndUnit(this.widthOfBox).value / 2) +
@@ -124,22 +129,39 @@ export class TbCarouselStackedCardComponent implements OnInit, AfterViewInit {
 
     this.generateCssStyles();
 
-    this.containerHeight =
-      this.orientation == "vertical" ?
-        (this.utility.getNumberAndUnit(this.heightOfBox).value *
-          (1 + this.utility.sumOfNosInArray(this.arrayOfCardSizeHalf)) +
-          this.utility.getNumberAndUnit(this.heightOfBox).unit) :
-        this.utility.getNumberAndUnit(this.heightOfBox).value * (1.2) +
+    if (this.utility.getNumberAndUnit(this.containerHeight).value == 0) {
+      this.containerHeight =
+        this.orientation == "vertical" ?
+          (this.utility.getNumberAndUnit(this.heightOfBox).value *
+            (1 + this.utility.sumOfNosInArray(this.arrayOfCardSizeHalf)) +
+            this.utility.getNumberAndUnit(this.heightOfBox).unit) :
+          this.utility.getNumberAndUnit(this.heightOfBox).value * (1.2) +
+          this.utility.getNumberAndUnit(this.heightOfBox).unit;
+    }
+
+    if (this.utility.getNumberAndUnit(this.containerWidth).value == 0) {
+      this.containerWidth =
+        this.orientation == "horizontal" ?
+          (this.utility.getNumberAndUnit(this.widthOfBox).value *
+            (1 + this.utility.sumOfNosInArray(this.arrayOfCardSizeHalf)) +
+            this.utility.getNumberAndUnit(this.widthOfBox).unit) :
+          this.utility.getNumberAndUnit(this.widthOfBox).value * (1.2) +
+          this.utility.getNumberAndUnit(this.widthOfBox).unit;
+    }
+
+    if (this.utility.getNumberAndUnit(this.imageMaxHeight).value == 0) {
+      this.imageMaxHeight =
+        (this.utility.getNumberAndUnit(this.heightOfBox).value
+          - this.utility.getNumberAndUnit(this.heightOfBox).value * 0.1) +
         this.utility.getNumberAndUnit(this.heightOfBox).unit;
+    }
 
-    this.containerWidth =
-      this.orientation == "horizontal" ?
-        (this.utility.getNumberAndUnit(this.widthOfBox).value *
-          (1 + this.utility.sumOfNosInArray(this.arrayOfCardSizeHalf)) +
-          this.utility.getNumberAndUnit(this.widthOfBox).unit) :
-        this.utility.getNumberAndUnit(this.widthOfBox).value * (1.2) +
+    if (this.utility.getNumberAndUnit(this.imageMaxWidth).value == 0) {
+      this.imageMaxWidth =
+        (this.utility.getNumberAndUnit(this.widthOfBox).value
+          - this.utility.getNumberAndUnit(this.widthOfBox).value * 0.1) +
         this.utility.getNumberAndUnit(this.widthOfBox).unit;
-
+    }
   }
 
   generatePositions() {

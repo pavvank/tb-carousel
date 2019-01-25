@@ -19,11 +19,11 @@ export class ComponentGenService {
     if (config) { this._userDefinedComp = config[componentId].userDefinedComp; }
   }
 
-  createComponent(e: ViewContainerRef, componentRef: any) {
+  createComponent(e: ViewContainerRef, componentRef: any, modelObject : any) {
     //this.entry.clear();
     let factory = this.resolver.resolveComponentFactory(this._userDefinedComp);
     componentRef = e.createComponent(factory);
-    //componentRef.instance.message = message;
+    componentRef.instance._tbModelObject = modelObject;
   }
 
 }
