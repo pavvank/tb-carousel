@@ -20,7 +20,7 @@ import { ComponentGenFactoryService } from '../util/component-gen-factory.servic
   templateUrl: './carousel-stacked-card.component.html',
   styleUrls: ['./carousel-stacked-card.component.css']
 })
-export class TbCarouselStackedCardComponent implements OnInit, AfterViewInit, AfterContentChecked  {
+export class TbCarouselStackedCardComponent implements OnInit, AfterViewInit, AfterContentChecked {
 
   marginLeft: string;
   marginTop: string;
@@ -56,12 +56,25 @@ export class TbCarouselStackedCardComponent implements OnInit, AfterViewInit, Af
   /*Container properties */
   @Input('containerHeight') containerHeight = "0px";
   @Input('containerWidth') containerWidth = "0px";
-  @Input('containerMargin') containerMargin = "0px";
 
   /*Image properties */
   @Input('imageMaxHeight') imageMaxHeight = "0px";
   @Input('imageMaxWidth') imageMaxWidth = "0px";
   @Input('imageBorderRadius') imageBorderRadius = "20px";
+
+  /**Navigation arrow properties */
+  @Input('arrowHeight') arrowHeight = "45px";
+  @Input('arrowColor') arrowColor = "black";
+  @Input('arrowColorChange') arrowColor2 = "rgb(100, 99, 100)";
+  arrowWidth = "30px";
+  arrowTopMargin = "-22px";
+  arrowColorTemp = this.arrowColor;
+  arrowBorder;
+  arrowColorTemp1 = this.arrowColor;
+  arrowBorder1;
+  @Input('autoScrollInterval') timeInterval = 5000;
+
+  pause: boolean = false;
 
   /**Methods*/
 
@@ -77,14 +90,14 @@ export class TbCarouselStackedCardComponent implements OnInit, AfterViewInit, Af
     // this.widgetTargets.toArray().forEach(el => {
     //   compGenService.createComponent(el, this.componentRef, this.data[0]);
     // });
-    for(let i =0; i < this.widgetTargets.toArray().length; i++){
+    for (let i = 0; i < this.widgetTargets.toArray().length; i++) {
       compGenService.createComponent(this.widgetTargets.toArray()[i], this.componentRef, this.data[i]);
     }
     this.changeDetector.detectChanges();
   }
 
   ngAfterContentChecked(): void {
-    
+
   }
 
 
@@ -162,6 +175,14 @@ export class TbCarouselStackedCardComponent implements OnInit, AfterViewInit, Af
           - this.utility.getNumberAndUnit(this.widthOfBox).value * 0.1) +
         this.utility.getNumberAndUnit(this.widthOfBox).unit;
     }
+
+    this.arrowWidth = (this.utility.getNumberAndUnit(this.arrowHeight).value / 1.5) +
+      this.utility.getNumberAndUnit(this.arrowHeight).unit;
+    this.arrowTopMargin = "-" + (this.utility.getNumberAndUnit(this.arrowHeight).value / 2) +
+      this.utility.getNumberAndUnit(this.arrowHeight).unit;
+    this.arrowBorder = "1px solid " + this.arrowColor;
+    this.arrowBorder1 = "1px solid " + this.arrowColor;
+
   }
 
   generatePositions() {
@@ -275,4 +296,33 @@ export class TbCarouselStackedCardComponent implements OnInit, AfterViewInit, Af
     this.utility.shiftLeft(this.cssStylesArray);
   }
 
+  changeArrowColor() {
+    this.arrowColorTemp = this.arrowColor2;
+    this.arrowBorder = "1px solid " + this.arrowColor2;
+  }
+
+  changeArrowColorOut() {
+    this.arrowColorTemp = this.arrowColor;
+    this.arrowBorder = "1px solid " + this.arrowColor;
+  }
+
+  changeArrowColor1() {
+    this.arrowColorTemp1 = this.arrowColor2;
+    this.arrowBorder1 = "1px solid " + this.arrowColor2;
+  }
+
+  changeArrowColorOut1() {
+    this.arrowColorTemp1 = this.arrowColor;
+    this.arrowBorder1 = "1px solid " + this.arrowColor;
+  }
+
+  pauseMethod() {
+    clearInterval(this.autoRotate);
+  }
+
+  resumeMethod() {
+    this.autoRotate = setInterval(() => {this.moveNext();}, this.timeInterval);
+  }
+
+  autoRotate = setInterval(() => {this.moveNext();}, this.timeInterval);
 }

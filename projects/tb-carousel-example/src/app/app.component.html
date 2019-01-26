@@ -1,8 +1,17 @@
 <!-- custom-component example -->
 <tb-carousel-stacked-card dataType="custom-component" 
     [displayData]="dataComponent" orientation="horizontal" component="2"
-    containerWidth="700px" cardHeight="300px" cardWidth="350px">
+    cardHeight="300px" cardWidth="350px" >
 </tb-carousel-stacked-card>
 
 <!-- text example -->
+<tb-carousel-stacked-card dataType="text" 
+    [displayData]="dataText" orientation="vertical"
+    cardHeight="300px" cardWidth="350px" cardColor="rgb(238, 130, 238)" arrowHeight="30px">
+</tb-carousel-stacked-card>
+
 <!-- image example -->
+<tb-carousel-stacked-card dataType="image" 
+    [displayData]="dataImage" orientation="horizontal"
+    cardHeight="250px" cardWidth="300px" cardColor="aqua">
+</tb-carousel-stacked-card>
