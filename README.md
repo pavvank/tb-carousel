@@ -219,58 +219,75 @@ Possible Value : number
 Numbers of cards that should be visible in carousel.
 Most preferable values range between 3 to 7 cards but can be as many as user wishes :).*    
 
-Note: *where ever applicable.
+Note: *where ever applicable.  
+
 ---
 ##### orientation
 Posssible values : **horizontal**, **vertical**.  
 
-Defines the orientation of the carousel, horizontally scrollable or vertically scrollable. 
+Defines the orientation of the carousel, horizontally scrollable or vertically scrollable.  
+
 ---
 ##### component
 Possible value : number.  
 
 Used when multiple carousels are to be used in single project having multiple types custom-component to be passed in different carousels.  
-The value to be passed should be a number specifing the index of the component passed in the TbCarouselLibModule.forRoot([]), which has to be used.
+The value to be passed should be a number specifing the index of the component passed in the TbCarouselLibModule.forRoot([]), which has to be used.  
+
 ---
 ##### cardHeight
 Possible Value : string (size in any unit used in CSS).  
 
-Height of the card.
+Height of the card.  
+
 ---
 ##### cardWidth
 Possible Value: string (size in any unit used in CSS).  
-Width of the card.
+
+Width of the card.  
+
 ---
 ##### cardColor
 Possible Value : string (any color in any format acceptable in CSS).  
-Background color of the card.
+
+Background color of the card.  
+
 ---
 ##### containerHeight
 Possible Value: string (size in any unit used in CSS).  
+
 ---
 ##### containerWidth
-Possible Value: string (size in any unit used in CSS).  
+Possible Value: string (size in any unit used in CSS).   
+
 ---
 ##### imageMaxHeight
-Possible Value: string (size in any unit used in CSS).  
+Possible Value: string (size in any unit used in CSS).   
+
 ---
 ##### imageMaxWidth
 Possible Value: string (size in any unit used in CSS).  
+
 ---
 ##### imageBorderRadius
 Possible Value: string (size in any unit used in CSS).  
+
 ---
 ##### autoScrollInterval
-Possible Value: number
+Possible Value: number  
+
 ---
 ##### arrowHeight
-Possible Value:
+Possible Value:  
+
 ---
 ##### arrowColor
-Possible Value:
+Possible Value:  
+
 ---
 ##### arrowColorChange
-Possible Value:
+Possible Value:  
+
 
 ---
 ### **Development**
