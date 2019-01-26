@@ -197,70 +197,70 @@ export class AppComponent implements OnInit {
 ---
 ### **Poperties of the carousel for data-binding**
 
-#####displayData
-Possible Value : array of any
+##### displayData
+Possible Value : array of any \s\s
 Array of data holding the values to be passed onto each card of the carousel.
 Data can be of any type.
 ---
-#####dataType
-Possible Value : string (image, text, custom-component)
+##### dataType
+Possible Value : string (image, text, custom-component)\s\s
 Defines the value of what kind of data is to be shown in the carousel.
 **image** : 
 **text** : 
 **custom-component** : 
 ---
-#####visibleCards
-Possible Value : number
+##### visibleCards
+Possible Value : number\s\s
 Numbers of cards that should be visible in carousel.
-Most preferable values range between 3 to 7 cards but can be as many as user wishes :).*
+Most preferable values range between 3 to 7 cards but can be as many as user wishes :).*\s\s
 Note: *where ever applicable.
 ---
-#####orientation
-Posssible values : **horizontal**, **vertical**.
+##### orientation
+Posssible values : **horizontal**, **vertical**.\s\s
 Defines the orientation of the carousel, horizontally scrollable or vertically scrollable. 
 ---
-#####component
-Possible value : number.
-Used when multiple carousels are to be used in single project having multiple types custom-component to be passed in different carousels.
+##### component
+Possible value : number.\s\s
+Used when multiple carousels are to be used in single project having multiple types custom-component to be passed in different carousels.\s\s
 The value to be passed should be a number specifing the index of the component passed in the TbCarouselLibModule.forRoot([]), which has to be used.
 ---
-#####cardHeight
-Possible Value : string (size in any unit used in CSS).
+##### cardHeight
+Possible Value : string (size in any unit used in CSS).\s\s
 Height of the card.
 ---
-#####cardWidth
-Possible Value: string (size in any unit used in CSS).
+##### cardWidth
+Possible Value: string (size in any unit used in CSS).\s\s
 Width of the card.
 ---
-#####cardColor
-Possible Value : string (any color in any format acceptable in CSS).
+##### cardColor
+Possible Value : string (any color in any format acceptable in CSS).\s\s
 Background color of the card.
 ---
-#####containerHeight
-Possible Value: string (size in any unit used in CSS).
+##### containerHeight
+Possible Value: string (size in any unit used in CSS).\s\s
 ---
-#####containerWidth
-Possible Value: string (size in any unit used in CSS).
+##### containerWidth
+Possible Value: string (size in any unit used in CSS).\s\s
 ---
-#####imageMaxHeight
-Possible Value: string (size in any unit used in CSS).
+##### imageMaxHeight
+Possible Value: string (size in any unit used in CSS).\s\s
 ---
-#####imageMaxWidth
-Possible Value: string (size in any unit used in CSS).
+##### imageMaxWidth
+Possible Value: string (size in any unit used in CSS).\s\s
 ---
-#####imageBorderRadius
-Possible Value: string (size in any unit used in CSS).
+##### imageBorderRadius
+Possible Value: string (size in any unit used in CSS).\s\s
 ---
-#####autoScrollInterval
+##### autoScrollInterval
 Possible Value: number
 ---
-#####arrowHeight
+##### arrowHeight
 Possible Value:
 ---
-#####arrowColor
+##### arrowColor
 Possible Value:
 ---
-#####arrowColorChange
+##### arrowColorChange
 Possible Value:
 
 ---
