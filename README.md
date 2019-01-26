@@ -53,7 +53,7 @@ export class AppModule { }
 ##### **Using with user defined component in carousel.**
 
 - If the data to be passed to carousel is from a user defined component then  
-*TbCarouselLibModule.forRoot({userDefinedComp : UserDefinedComponent})* method
+*TbCarouselLibModule.forRoot([{userDefinedComp : UserDefinedComponent}])* method
 is to be used to pass the desired component.
 - Also *(user defined component)* has to passed to the :
 *entryComponents: [UserDefinedComponent]* in **app.module.ts** .
@@ -72,7 +72,7 @@ import { UserDefinedComponent } from './user.component';
   ],
   imports: [
     BrowserModule,
-    TbCarouselLibModule.forRoot({userDefinedComp : UserDefinedComponent})
+    TbCarouselLibModule.forRoot([{userDefinedComp : UserDefinedComponent}])
   ],
   providers: [],
   bootstrap: [AppComponent],
@@ -278,15 +278,15 @@ Possible Value: number
 
 ---
 ##### arrowHeight
-Possible Value:  
+Possible Value:  string (size in any unit used in CSS).  
 
 ---
 ##### arrowColor
-Possible Value:  
+Possible Value:  string (any color in any format acceptable in CSS).  
 
 ---
 ##### arrowColorChange
-Possible Value:  
+Possible Value:  string (any color in any format acceptable in CSS).  
 
 
 ---
