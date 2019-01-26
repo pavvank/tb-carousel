@@ -201,15 +201,17 @@ export class AppComponent implements OnInit {
 Possible Value : array of any   
 
 Array of data holding the values to be passed onto each card of the carousel.
-Data can be of any type.
+Data can be of any type.  
+
 ---
 ##### dataType
 Possible Value : string (image, text, custom-component)  
 
 Defines the value of what kind of data is to be shown in the carousel.
-**image** : 
-**text** : 
-**custom-component** : 
+- **image** : 
+- **text** : 
+- **custom-component** :  
+
 ---
 ##### visibleCards
 Possible Value : number  
@@ -232,7 +234,7 @@ The value to be passed should be a number specifing the index of the component p
 ---
 ##### cardHeight
 Possible Value : string (size in any unit used in CSS).  
-  
+
 Height of the card.
 ---
 ##### cardWidth
