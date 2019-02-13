@@ -14,7 +14,6 @@
     - Text 
     - Text with headings
     - User defined components
-    - Image size to be added in percentage,for responsiveness.
 
     By using custom components, the structure of the data within each card, of the collection can be easily diplayed in carousel.
 
