@@ -7,8 +7,9 @@ import {
   QueryList,
   AfterViewInit,
   Input,
-  AfterContentChecked,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  ElementRef,
+  Renderer2
 } from '@angular/core';
 import { CardCSS } from '../models/cardcss.model';
 import { ComponentGenService } from '../util/component-gen.service';
@@ -20,7 +21,7 @@ import { ComponentGenFactoryService } from '../util/component-gen-factory.servic
   templateUrl: './carousel-stacked-card.component.html',
   styleUrls: ['./carousel-stacked-card.component.css']
 })
-export class TbCarouselStackedCardComponent implements OnInit, AfterViewInit, AfterContentChecked {
+export class TbCarouselStackedCardComponent implements OnInit, AfterViewInit {
 
   marginLeft: string;
   marginTop: string;
@@ -52,6 +53,9 @@ export class TbCarouselStackedCardComponent implements OnInit, AfterViewInit, Af
   @Input('cardHeight') heightOfBox: string = "250px";
   @Input('cardWidth') widthOfBox: string = "300px";
   @Input('cardColor') cardColor: string = "white";
+  @Input('tbStyle') tbStyle: { [key: string]: string; };
+  property: string[] = [];
+  values: string[] = [];
 
   /*Container properties */
   @Input('containerHeight') containerHeight = "0px";
@@ -79,35 +83,44 @@ export class TbCarouselStackedCardComponent implements OnInit, AfterViewInit, Af
   /**Methods*/
 
   @ViewChildren('customComponent', { read: ViewContainerRef }) public widgetTargets: QueryList<ViewContainerRef>;
-
+  @ViewChildren('commonCard', { read: ElementRef }) commonCard: QueryList<ElementRef>;
   constructor(private resolver: ComponentFactoryResolver,
     private compGenFactoryService: ComponentGenFactoryService, public utility: UtilitiesService,
-    private changeDetector: ChangeDetectorRef) { }
+    private changeDetector: ChangeDetectorRef,
+    private elRef: ElementRef, private renderer: Renderer2) {
+  }
 
   ngAfterViewInit(): void {
+
+    for (let i = 0; i < this.commonCard.toArray().length; i++) {
+      let styles;
+
+      if (i == 0 && this.tbStyle) {
+        styles = this.tbStyle;
+        this.property = Object.keys(styles);
+        this.values = Object.values(styles);
+      }
+      if (this.property.length == this.values.length) {
+        for (let j = 0; j < this.property.length; j++) {
+          this.renderer.setStyle(this.commonCard.toArray()[i].nativeElement, this.property[j], this.values[j]);
+        }
+      }
+    }
+
+
     let compGenService: ComponentGenService = this.compGenFactoryService.
       createComponentGenServiceObject(this.component);
-    // this.widgetTargets.toArray().forEach(el => {
-    //   compGenService.createComponent(el, this.componentRef, this.data[0]);
-    // });
     for (let i = 0; i < this.widgetTargets.toArray().length; i++) {
       compGenService.createComponent(this.widgetTargets.toArray()[i], this.componentRef, this.data[i]);
     }
     this.changeDetector.detectChanges();
   }
 
-  ngAfterContentChecked(): void {
-
-  }
-
-
   destroyComponent() {
     this.componentRef.destroy();
   }
 
-
   ngOnInit(): void {
-
     this.visibleBlocks = this.data.length < this.visibleBlocks ? this.data.length : this.visibleBlocks;
 
     if (this.orientation == "horizontal") {
@@ -321,8 +334,8 @@ export class TbCarouselStackedCardComponent implements OnInit, AfterViewInit, Af
   }
 
   resumeMethod() {
-    this.autoRotate = setInterval(() => {this.moveNext();}, this.timeInterval);
+    this.autoRotate = setInterval(() => { this.moveNext(); }, this.timeInterval);
   }
 
-  autoRotate = setInterval(() => {this.moveNext();}, this.timeInterval);
+  autoRotate = setInterval(() => { this.moveNext(); }, this.timeInterval);
 }

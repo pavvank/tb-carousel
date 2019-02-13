@@ -1,7 +1,8 @@
 <!-- custom-component example -->
 <tb-carousel-stacked-card dataType="custom-component" 
     [displayData]="dataComponent" orientation="horizontal" component="2"
-    cardHeight="300px" cardWidth="350px" >
+    cardHeight="300px" cardWidth="350px" 
+    [tbStyle]="{'background-color': 'yellow', 'border': '10px solid green'}">
 </tb-carousel-stacked-card>
 
 <!-- text example -->
@@ -13,5 +14,8 @@
 <!-- image example -->
 <tb-carousel-stacked-card dataType="image" 
     [displayData]="dataImage" orientation="horizontal"
-    cardHeight="250px" cardWidth="300px" cardColor="aqua">
+    cardHeight="250px" cardWidth="300px" cardColor="aqua"
+    [tbStyle]="{'background-color': 'yellow', 'border': '10px solid green'}">
 </tb-carousel-stacked-card>
+
+<button (click)="abc()" >Change data</button>
