@@ -3,15 +3,14 @@
 **tb-carousel-lib** is a collection of responsive carousels for Angular based Web Applications.
   - Simply import the angular module using npm and use it within your components.
   - Customisable using property binding.
-- 
   
 ---
 ### **Features!**
 
   - Choose from a variety of styled Carousels.
-    - Basic carousel (<tb-carousel-basic>)
-    - Stacked card carousel (<tb-carousel-stacked-card>)
-    - 3D carousel (<tb-carousel-three-d>)
+    - Basic carousel <tb-carousel-basic>
+    - Stacked card carousel <tb-carousel-stacked-card>
+    - 3D carousel <tb-carousel-three-d>
   - Available in both horizontal and vertical scrolling behaviours.
   - Accepts various kinds of data formats :
     - Images
@@ -91,7 +90,7 @@ To get the carousel at the desired location within the HTML code, simply insert 
 Simple Illustration: A Stacked Card style Horizontal Carousal in **app.component.html**
 ```html
 <div class="container">
-<tb-carousel-stacked-card 
+  <tb-carousel-stacked-card 
     dataType="text" 
     [displayData]="dataText" 
     orientation="horizontal"
@@ -100,7 +99,7 @@ Simple Illustration: A Stacked Card style Horizontal Carousal in **app.component
     arrowHeight="30px"
     [tbCardStyle]="{'background-color': 'pink', 'border' : '5px solid green'}"
     [showNavArrow]="true">
-</tb-carousel-stacked-card>
+  </tb-carousel-stacked-card>
 </div>
 ```
 
@@ -217,8 +216,7 @@ export class AppComponent implements OnInit {
 |                                                                   stopScrollOnHover                                                                    |      boolean      |      TRUE       |                 true or false                  |                                                                                                                                                                                           |
 |                                                                      displayData                                                                       |       array       |      null       |           array of data to be passed           |                                          Array of data holding the values to be passed onto each card of the carousel. Data can be of any type.                                           |
 |                                                                      orientation                                                                       |      string       |   horizontal    |             horizontal or vertical             |                                                Defines the orientation of the carousel, horizontally scrollable or vertically scrollable.                                                 |
-|                                                                       component                                                                        |      number       |        0        |                     0,1,2…                     |                        "Used when multiple carousels are to be used in single project having multiple types custom-component to be passed in different carousels.                         |
-| The value to be passed should be a number specifing the index of the component passed in the TbCarouselLibModule.forRoot([]), which has to be used.  " |
+|                                                                       component                                                                        |      number       |        0        |                     0,1,2…                     |                        "Used when multiple carousels are to be used in single project having multiple types custom-component to be passed in different carousels. The value to be passed should be a number specifing the index of the component passed in the TbCarouselLibModule.forRoot([]), which has to be used.  " |
 |                                                                        dataType                                                                        |      string       |      text       |         text, image, custom-component          |                                                                                                                                                                                           |
 |                                                                       cardHeight                                                                       |      string       |      300px      |       height in any css acceptable unit        |                                                                                                                                                                                           |
 |                                                                       cardWidth                                                                        |      string       |      350px      |        width in any css acceptable unit        |                                                                                                                                                                                           |
@@ -276,4 +274,3 @@ MIT
    [PlOd]: <https://github.com/joemccann/dillinger/tree/master/plugins/onedrive/README.md>
    [PlMe]: <https://github.com/joemccann/dillinger/tree/master/plugins/medium/README.md>
    [PlGa]: <https://github.com/RahulHP/dillinger/blob/master/plugins/googleanalytics/README.md>
-
