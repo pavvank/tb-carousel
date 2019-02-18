@@ -3,19 +3,24 @@
 **tb-carousel-lib** is a collection of responsive carousels for Angular based Web Applications.
   - Simply import the angular module using npm and use it within your components.
   - Customisable using property binding.
+- 
   
 ---
 ### **Features!**
 
   - Choose from a variety of styled Carousels.
+    - Basic carousel (<tb-carousel-basic>)
+    - Stacked card carousel (<tb-carousel-stacked-card>)
+    - 3D carousel (<tb-carousel-three-d>)
   - Available in both horizontal and vertical scrolling behaviours.
   - Accepts various kinds of data formats :
-    * Images
+    - Images
     - Text 
-    - Text with headings
     - User defined components
 
     By using custom components, the structure of the data within each card, of the collection can be easily diplayed in carousel.
+
+##### **NOTE :** Do not use sizes in percentage. If want to stretch to complete page just use 100vh for height and 100vw for width or any other css unit. Percentages do not work great as of now :( .
 
 ---
 ### **Installation**
@@ -41,7 +46,7 @@ import { TbCarouselLibModule } from 'tb-carousel-lib'
     AppComponent
   ],
   imports: [
-    TbCarouselLibModule
+    TbCarouselLibModule.forRoot([])
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -86,10 +91,16 @@ To get the carousel at the desired location within the HTML code, simply insert 
 Simple Illustration: A Stacked Card style Horizontal Carousal in **app.component.html**
 ```html
 <div class="container">
-    <tb-carousel-stacked-card 
-        [dataType]="'image'"
-        [data]="arrayOfImagesUrls">
-    </tb-carousel-stacked-card>
+<tb-carousel-stacked-card 
+    dataType="text" 
+    [displayData]="dataText" 
+    orientation="horizontal"
+    cardHeight="300px" 
+    cardWidth="350px"  
+    arrowHeight="30px"
+    [tbCardStyle]="{'background-color': 'pink', 'border' : '5px solid green'}"
+    [showNavArrow]="true">
+</tb-carousel-stacked-card>
 </div>
 ```
 
@@ -113,7 +124,7 @@ export class Custom{
     content : string;
     
     constructor(id : number, imageSrc : string, heading : string, 
-         content : string;){
+         content : string){
          this.id = id;
          this.imageSrc = imageSrc;
          this.heading = heading;
@@ -124,6 +135,7 @@ export class Custom{
 **custom.component.ts**
 ```typescript
 import { Component, OnInit, Input } from '@angular/core';
+import { Custom } from './custom.model';
 
 @Component({
   selector: 'app-custom',
@@ -132,7 +144,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CustomComponent implements OnInit {
 
-  @Input('modelObject') modelObject : Custom;
+  @Input('modelObject') _tbModelObject : Custom;
 
   constructor() { }
 
@@ -140,21 +152,17 @@ export class CustomComponent implements OnInit {
   }
 }
 ```
+Note : The name of the variable for property binding in @input must be **_tbModelObject**
+
 **custom.component.html**
 ```html
-<div class="container">
-  <div class="row">
-    <div class="col-sm">{{modelObject.heading}}</div>
-  </div>
-  <div class="row">
-    <div class="col-sm-6">
-      <img src="{{modelObject.imageSrc}}" alt="alt text">
+<div class="parent">
+    <div class="content">
+        <h2>{{_tbModelObject.heading}}</h2>
+        <hr>
+        <img [src]="_tbModelObject.imageSrc" alt="">
+        <p>{{_tbModelObject.content}}</p>
     </div>
-    <div class="col-sm-6">
-      <p>{{modelObject.content}}</p>
-      <button [routerLink]="['/topic',modelObject.id]">More...</button>
-    </div>
-  </div>
 </div>
 ```
 
@@ -171,11 +179,11 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class AppComponent implements OnInit {
 
-  public arrayOfCustomComponent : Custom[] = [
-    new Custom(101, "moon.jpg", "The Moon", "The Moon is an astronomical body that orbits planet Earth."),
-    new Custom(102, "sun.jpg", "The Sun", "The Sun is the star at the center of the Solar System."),
-    new Custom(103, "earth.jpg", "The Earth", "Earth is the third planet from the Sun and the only astronomical object known to harbor life."),
-    ]
+  dataComponent: Custom[] = [
+    new Custom(101, "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/220px-FullMoon2010.jpg", "Moon", "Description"),
+    new Custom(102, "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Sun_poster.svg/500px-Sun_poster.svg.png", "Sun", "Description"),
+    new Custom(103, "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/The_Earth_seen_from_Apollo_17.jpg/220px-The_Earth_seen_from_Apollo_17.jpg", "Earth", "Description"),
+  ];
 
   constructor() { }
 
@@ -187,105 +195,45 @@ export class AppComponent implements OnInit {
 **app.component.html**
 ```html
 <div class="container">
-    <tb-carousel-stacked-card 
-        [dataType]="'custom-component'"
-        [data]="arrayOfCustomComponent">
-    </tb-carousel-stacked-card>
+<tb-carousel-stacked-card 
+    dataType="custom-component" 
+    [displayData]="dataComponent" 
+    orientation="horizontal" 
+    component="2"
+    cardHeight="300px" 
+    cardWidth="350px" 
+    [tbCardStyle]="{'background-color': 'yellow', 'border': '10px solid green', 'overflow':'hidden'}"
+    [stopScrollOnHover]="true"
+    visibleCards="3">
+</tb-carousel-stacked-card>
 </div>
 ```
 ---
 ### **Poperties of the carousel for data-binding**
 
-##### displayData
-Possible Value : array of any   
+|                                                                        Property                                                                        |     Data Type     | Default  Value  |                Possible values                 |                                                                                        Description                                                                                        |
+| :----------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------: | :-------------: | :--------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|                                                                   autoScrollInterval                                                                   |      number       |      3000       |                in milliseconds                 |                                                                                                                                                                                           |
+|                                                                   stopScrollOnHover                                                                    |      boolean      |      TRUE       |                 true or false                  |                                                                                                                                                                                           |
+|                                                                      displayData                                                                       |       array       |      null       |           array of data to be passed           |                                          Array of data holding the values to be passed onto each card of the carousel. Data can be of any type.                                           |
+|                                                                      orientation                                                                       |      string       |   horizontal    |             horizontal or vertical             |                                                Defines the orientation of the carousel, horizontally scrollable or vertically scrollable.                                                 |
+|                                                                       component                                                                        |      number       |        0        |                     0,1,2…                     |                        "Used when multiple carousels are to be used in single project having multiple types custom-component to be passed in different carousels.                         |
+| The value to be passed should be a number specifing the index of the component passed in the TbCarouselLibModule.forRoot([]), which has to be used.  " |
+|                                                                        dataType                                                                        |      string       |      text       |         text, image, custom-component          |                                                                                                                                                                                           |
+|                                                                       cardHeight                                                                       |      string       |      300px      |       height in any css acceptable unit        |                                                                                                                                                                                           |
+|                                                                       cardWidth                                                                        |      string       |      350px      |        width in any css acceptable unit        |                                                                                                                                                                                           |
+|                                                                      tbCardStyle                                                                       | javascript object |      null       | example: {'margin':'auto', 'font-size':'20px'} |                                                                                                                                                                                           |
+|                                                                      tbImageStyle                                                                      | javascript object |      null       | example: {'margin':'auto', 'font-size':'20px'} |                                                                                                                                                                                           |
+|                                                                    containerHeight                                                                     |      string       | auto calculated |       height in any css acceptable unit        |                                                                                                                                                                                           |
+|                                                                     containerWidth                                                                     |      string       | auto calculated |        width in any css acceptable unit        |                                                                                                                                                                                           |
+|                                                                      tbTransition                                                                      |      string       |                 |    any acceptable css value for transition     |                                                                                                                                                                                           |
+|                                                                      arrowHeight                                                                       |      string       |      45px       |       height in any css acceptable unit        |                                                                                                                                                                                           |
+|                                                                       arrowColor                                                                       |      string       |                 |      colour in any css acceptable format       |                                                                                                                                                                                           |
+|                                                                    arrowColorChange                                                                    |      string       |                 |      colour in any css acceptable format       |                                                                                                                                                                                           |
+|                                                                    navArrowOpacity                                                                     |      number       |       0.5       |                      0-1                       |                                                                                                                                                                                           |
+|                                                                      showNavArrow                                                                      |      boolean      |      TRUE       |                 true or false                  |                                                                                                                                                                                           |
+|                                                                      visibleCards                                                                      |      number       |        5        |                  any integer                   | Numbers of cards that should be visible in carousel.Most preferable values range between 3 to 7 cards but can be as many as user wishes :).Note: Applicable to Stacked Card carousel only |
 
-Array of data holding the values to be passed onto each card of the carousel.
-Data can be of any type.  
-
----
-##### dataType
-Possible Value : string (image, text, custom-component)  
-
-Defines the value of what kind of data is to be shown in the carousel.
-- **image** : 
-- **text** : 
-- **custom-component** :  
-
----
-##### visibleCards
-Possible Value : number  
-
-Numbers of cards that should be visible in carousel.
-Most preferable values range between 3 to 7 cards but can be as many as user wishes :).*    
-
-Note: *where ever applicable.  
-
----
-##### orientation
-Posssible values : **horizontal**, **vertical**.  
-
-Defines the orientation of the carousel, horizontally scrollable or vertically scrollable.  
-
----
-##### component
-Possible value : number.  
-
-Used when multiple carousels are to be used in single project having multiple types custom-component to be passed in different carousels.  
-The value to be passed should be a number specifing the index of the component passed in the TbCarouselLibModule.forRoot([]), which has to be used.  
-
----
-##### cardHeight
-Possible Value : string (size in any unit used in CSS).  
-
-Height of the card.  
-
----
-##### cardWidth
-Possible Value: string (size in any unit used in CSS).  
-
-Width of the card.  
-
----
-##### cardColor
-Possible Value : string (any color in any format acceptable in CSS).  
-
-Background color of the card.  
-
----
-##### containerHeight
-Possible Value: string (size in any unit used in CSS).  
-
----
-##### containerWidth
-Possible Value: string (size in any unit used in CSS).   
-
----
-##### imageMaxHeight
-Possible Value: string (size in any unit used in CSS).   
-
----
-##### imageMaxWidth
-Possible Value: string (size in any unit used in CSS).  
-
----
-##### imageBorderRadius
-Possible Value: string (size in any unit used in CSS).  
-
----
-##### autoScrollInterval
-Possible Value: number  
-
----
-##### arrowHeight
-Possible Value:  string (size in any unit used in CSS).  
-
----
-##### arrowColor
-Possible Value:  string (any color in any format acceptable in CSS).  
-
----
-##### arrowColorChange
-Possible Value:  string (any color in any format acceptable in CSS).  
 
 
 ---

@@ -42,6 +42,11 @@ export class TbCarouselStackedCardComponent implements OnInit, AfterViewInit {
 
   componentRef: any;
 
+  /** */
+  @Input('autoScrollInterval') timeInterval: number = 1000;
+  @Input('stopScrollOnHover') stopScrollOnHover: boolean = true;
+  autoRotate;
+
   /*Data and visible no. of cards */
   @Input('displayData') data: any[];
   @Input('visibleCards') visibleBlocks: number = 5;
@@ -52,19 +57,17 @@ export class TbCarouselStackedCardComponent implements OnInit, AfterViewInit {
   /*Card Style properties*/
   @Input('cardHeight') heightOfBox: string = "250px";
   @Input('cardWidth') widthOfBox: string = "300px";
-  @Input('cardColor') cardColor: string = "white";
-  @Input('tbStyle') tbStyle: { [key: string]: string; };
+  @Input('tbCardStyle') tbStyle: { [key: string]: string; };
   property: string[] = [];
   values: string[] = [];
 
   /*Container properties */
   @Input('containerHeight') containerHeight = "0px";
   @Input('containerWidth') containerWidth = "0px";
+  @Input('tbTransition') tbTransition = "left 1s, transform 1s, top 1s";
 
   /*Image properties */
-  @Input('imageMaxHeight') imageMaxHeight = "0px";
-  @Input('imageMaxWidth') imageMaxWidth = "0px";
-  @Input('imageBorderRadius') imageBorderRadius = "20px";
+  @Input('tbImageStyle') tbImageStyle;
 
   /**Navigation arrow properties */
   @Input('arrowHeight') arrowHeight = "45px";
@@ -76,9 +79,9 @@ export class TbCarouselStackedCardComponent implements OnInit, AfterViewInit {
   arrowBorder;
   arrowColorTemp1 = this.arrowColor;
   arrowBorder1;
-  @Input('autoScrollInterval') timeInterval = 5000;
-
-  pause: boolean = false;
+  showNav: string = "block";
+  @Input('navArrowOpacity') navArrowOpacity = 0.5;
+  @Input('showNavArrow') showNavArrow: boolean = true;
 
   /**Methods*/
 
@@ -108,12 +111,20 @@ export class TbCarouselStackedCardComponent implements OnInit, AfterViewInit {
     }
 
 
-    let compGenService: ComponentGenService = this.compGenFactoryService.
-      createComponentGenServiceObject(this.component);
-    for (let i = 0; i < this.widgetTargets.toArray().length; i++) {
-      compGenService.createComponent(this.widgetTargets.toArray()[i], this.componentRef, this.data[i]);
+    if (this.dataType == "custom-component") {
+      try {
+        let compGenService: ComponentGenService = this.compGenFactoryService.
+          createComponentGenServiceObject(this.component);
+        for (let i = 0; i < this.widgetTargets.toArray().length; i++) {
+          compGenService.createComponent(this.widgetTargets.toArray()[i], this.componentRef, this.data[i]);
+        }
+        this.changeDetector.detectChanges();
+      } catch (error) {
+        console.error("No componenet is defined in TbCarouselLibModule.forRoot([]) please add the component needed and pass on the index of component as property bind e.g. component='1'.");
+      }
+
     }
-    this.changeDetector.detectChanges();
+
   }
 
   destroyComponent() {
@@ -121,6 +132,15 @@ export class TbCarouselStackedCardComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+
+    this.autoRotate = setInterval(() => { if (document.hasFocus()) { this.moveNext(); } }, this.timeInterval);
+
+    if (this.showNavArrow) {
+      this.showNav = "block";
+    } else {
+      this.showNav = "none";
+    }
+
     this.visibleBlocks = this.data.length < this.visibleBlocks ? this.data.length : this.visibleBlocks;
 
     if (this.orientation == "horizontal") {
@@ -165,6 +185,7 @@ export class TbCarouselStackedCardComponent implements OnInit, AfterViewInit {
           this.utility.getNumberAndUnit(this.heightOfBox).unit;
     }
 
+
     if (this.utility.getNumberAndUnit(this.containerWidth).value == 0) {
       this.containerWidth =
         this.orientation == "horizontal" ?
@@ -173,20 +194,6 @@ export class TbCarouselStackedCardComponent implements OnInit, AfterViewInit {
             this.utility.getNumberAndUnit(this.widthOfBox).unit) :
           this.utility.getNumberAndUnit(this.widthOfBox).value * (1.2) +
           this.utility.getNumberAndUnit(this.widthOfBox).unit;
-    }
-
-    if (this.utility.getNumberAndUnit(this.imageMaxHeight).value == 0) {
-      this.imageMaxHeight =
-        (this.utility.getNumberAndUnit(this.heightOfBox).value
-          - this.utility.getNumberAndUnit(this.heightOfBox).value * 0.1) +
-        this.utility.getNumberAndUnit(this.heightOfBox).unit;
-    }
-
-    if (this.utility.getNumberAndUnit(this.imageMaxWidth).value == 0) {
-      this.imageMaxWidth =
-        (this.utility.getNumberAndUnit(this.widthOfBox).value
-          - this.utility.getNumberAndUnit(this.widthOfBox).value * 0.1) +
-        this.utility.getNumberAndUnit(this.widthOfBox).unit;
     }
 
     this.arrowWidth = (this.utility.getNumberAndUnit(this.arrowHeight).value / 1.5) +
@@ -330,12 +337,15 @@ export class TbCarouselStackedCardComponent implements OnInit, AfterViewInit {
   }
 
   pauseMethod() {
-    clearInterval(this.autoRotate);
+    if (this.stopScrollOnHover) {
+      clearInterval(this.autoRotate);
+    }
   }
 
   resumeMethod() {
-    this.autoRotate = setInterval(() => { this.moveNext(); }, this.timeInterval);
+    if (this.stopScrollOnHover) {
+      this.autoRotate = setInterval(() => { if (document.hasFocus()) { this.moveNext(); } }, this.timeInterval);
+    }
   }
 
-  autoRotate = setInterval(() => { this.moveNext(); }, this.timeInterval);
 }

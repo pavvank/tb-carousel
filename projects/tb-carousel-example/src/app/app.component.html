@@ -1,21 +1,111 @@
+<!-- Stacked Card Carousel -->
 <!-- custom-component example -->
-<tb-carousel-stacked-card dataType="custom-component" 
-    [displayData]="dataComponent" orientation="horizontal" component="2"
-    cardHeight="300px" cardWidth="350px" 
-    [tbStyle]="{'background-color': 'yellow', 'border': '10px solid green'}">
+<tb-carousel-stacked-card 
+    dataType="custom-component" 
+    [displayData]="dataComponent" 
+    orientation="horizontal" 
+    component="2"
+    cardHeight="300px" 
+    cardWidth="350px" 
+    [tbCardStyle]="{'background-color': 'yellow', 'border': '10px solid green', 'overflow':'hidden'}"
+    [stopScrollOnHover]="true"
+    visibleCards="3">
 </tb-carousel-stacked-card>
 
 <!-- text example -->
-<tb-carousel-stacked-card dataType="text" 
-    [displayData]="dataText" orientation="vertical"
-    cardHeight="300px" cardWidth="350px" cardColor="rgb(238, 130, 238)" arrowHeight="30px">
+<tb-carousel-stacked-card 
+    dataType="text" 
+    [displayData]="dataText" 
+    orientation="horizontal"
+    cardHeight="300px" 
+    cardWidth="350px"  
+    arrowHeight="30px"
+    [tbCardStyle]="{'background-color': 'pink', 'border' : '5px solid green'}"
+    [showNavArrow]="true">
 </tb-carousel-stacked-card>
 
 <!-- image example -->
-<tb-carousel-stacked-card dataType="image" 
-    [displayData]="dataImage" orientation="horizontal"
-    cardHeight="250px" cardWidth="300px" cardColor="aqua"
-    [tbStyle]="{'background-color': 'yellow', 'border': '10px solid green'}">
+<tb-carousel-stacked-card 
+    dataType="image" 
+    [displayData]="dataImage" 
+    orientation="horizontal"
+    cardHeight="250px" 
+    cardWidth="300px" 
+    cardColor="aqua"
+    [tbCardStyle]="{'background-color': 'pink', 'border': '10px solid green'}"
+    [tbImageStyle]="{'max-height': '200px', 'max-width' : '250px'}">
 </tb-carousel-stacked-card>
 
-<button (click)="abc()" >Change data</button>
+<!-- Basic Carousel -->
+<!-- custom-component example -->
+<tb-carousel-basic 
+    dataType="custom-component" 
+    [displayData]="dataComponent" 
+    orientation="horizontal" 
+    component="2"
+    cardHeight="300px" 
+    cardWidth="350px" 
+    [tbCardStyle]="{'background-color': 'yellow', 'border': '10px solid green', 'overflow':'hidden'}"
+    [stopScrollOnHover]="true"
+    visibleCards="3">
+</tb-carousel-basic>
+
+<!-- text example -->
+<tb-carousel-basic 
+    dataType="text" 
+    [displayData]="dataText" 
+    orientation="horizontal"
+    cardHeight="300px" 
+    cardWidth="350px"  
+    arrowHeight="30px"
+    [tbCardStyle]="{'background-color': 'pink', 'border' : '5px solid green'}"
+    [showNavArrow]="true">
+</tb-carousel-basic>
+
+<!-- image example -->
+<tb-carousel-basic
+    dataType="image" 
+    [displayData]="dataImage" 
+    orientation="horizontal"
+    cardHeight="250px" 
+    cardWidth="300px" 
+    cardColor="aqua"
+    [tbCardStyle]="{'background-color': 'pink', 'border': '10px solid green'}"
+    [tbImageStyle]="{'max-height': '200px', 'max-width' : '250px'}">
+</tb-carousel-basic>
+
+<!-- Carousel three d -->
+<tb-carousel-three-d 
+    dataType="custom-component" 
+    [displayData]="dataComponent" 
+    orientation="horizontal" 
+    component="2"
+    cardHeight="300px" 
+    cardWidth="350px" 
+    [tbCardStyle]="{'background-color': 'yellow', 'border': '10px solid green', 'overflow':'hidden'}"
+    [stopScrollOnHover]="true"
+    visibleCards="3">
+</tb-carousel-three-d >
+
+<!-- text example -->
+<tb-carousel-three-d  
+    dataType="text" 
+    [displayData]="dataText" 
+    orientation="horizontal"
+    cardHeight="300px" 
+    cardWidth="350px"  
+    arrowHeight="30px"
+    [tbCardStyle]="{'background-color': 'pink', 'border' : '5px solid green'}"
+    [showNavArrow]="true">
+</tb-carousel-three-d >
+
+<!-- image example -->
+<tb-carousel-three-d 
+    dataType="image" 
+    [displayData]="dataImage" 
+    orientation="horizontal"
+    cardHeight="250px" 
+    cardWidth="300px" 
+    cardColor="aqua"
+    [tbImageStyle]="{'max-height': '200px', 'max-width' : '200px', 'left': '0px'}">
+</tb-carousel-three-d >
