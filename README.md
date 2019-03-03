@@ -4,7 +4,8 @@
   - Simply import the angular module using npm and use it within your components.
   - Customisable using property binding.
   
-## Demo of tb-carousel can be seen at : **https://pavvank.github.io/tb-carousel**
+## Demo of tb-carousel can be seen at
+#### **https://pavvank.github.io/tb-carousel**
   
 ---
 ### **Features!**
