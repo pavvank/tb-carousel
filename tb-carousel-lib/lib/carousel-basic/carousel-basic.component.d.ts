@@ -1,0 +1,72 @@
+import { OnInit, ViewContainerRef, ComponentFactoryResolver, QueryList, ChangeDetectorRef, ElementRef, Renderer2 } from '@angular/core';
+import { CardCSS } from '../models/cardcss.model';
+import { UtilitiesService } from '../util/utilities.service';
+import { ComponentGenFactoryService } from '../util/component-gen-factory.service';
+export declare class CarouselBasicComponent implements OnInit {
+    private resolver;
+    private compGenFactoryService;
+    utility: UtilitiesService;
+    private changeDetector;
+    private renderer;
+    cssStylesArray: CardCSS[];
+    arrayOfPosition: number[];
+    arrayOfVerticalPosition: number[];
+    autoRotate: any;
+    rotateTransform: any;
+    rotateFn: any;
+    selectedIndex: number;
+    componentRef: any;
+    /** */
+    timeInterval: number;
+    stopScrollOnHover: boolean;
+    data: any[];
+    orientation: string;
+    component: number;
+    dataType: string;
+    heightOfBox: string;
+    widthOfBox: string;
+    tbStyle: {
+        [key: string]: string;
+    };
+    property: string[];
+    values: string[];
+    tbImageStyle: any;
+    containerHeight: any;
+    containerWidth: any;
+    tbTransition: string;
+    tbTransitionInitial: any;
+    /**Navigation arrow properties */
+    arrowHeight: string;
+    arrowColor: string;
+    arrowColor2: string;
+    arrowWidth: string;
+    arrowTopMargin: string;
+    arrowColorTemp: string;
+    arrowBorder: any;
+    arrowColorTemp1: string;
+    arrowBorder1: any;
+    showNav: string;
+    navArrowOpacity: number;
+    showNavArrow: boolean;
+    /**Methods*/
+    widgetTargets: QueryList<ViewContainerRef>;
+    commonCard: QueryList<ElementRef>;
+    constructor(resolver: ComponentFactoryResolver, compGenFactoryService: ComponentGenFactoryService, utility: UtilitiesService, changeDetector: ChangeDetectorRef, renderer: Renderer2);
+    ngAfterViewInit(): void;
+    destroyComponent(): void;
+    ngOnInit(): void;
+    generatePositions(): void;
+    generateVerticalPositions(): void;
+    getLeft(margin: number): string;
+    getTop(margin: number): string;
+    generateCssStyles(): void;
+    rotate(): void;
+    moveNext(): void;
+    movePrevious(): void;
+    changeArrowColor(): void;
+    changeArrowColorOut(): void;
+    changeArrowColor1(): void;
+    changeArrowColorOut1(): void;
+    pauseMethod(): void;
+    resumeMethod(): void;
+}
