@@ -1,0 +1,65 @@
+<div [ngStyle]="{'height' : containerHeight, 'width' : containerWidth,
+'position' : 'relative', 'margin':'auto', 'box-sizing': 'border-box'}" (mouseover)="pauseMethod()"
+  (mouseout)="resumeMethod()">
+
+
+  <!-- table is used for vertically central aligning -->
+  <table id="wrapper" [ngStyle]="{'height' : containerHeight, 'width' : containerWidth,
+  'margin':'0px', 'padding':'0px'}">
+    <tr [ngStyle]="{'margin':'0px', 'padding':'0px'}">
+      <td [ngStyle]="{'margin':'0px', 'padding':'0px'}">
+
+
+        <div class="scene" [ngStyle]="{'width':sceneWidth, 'height': sceneHeight}">
+          <div class="tb-carousel" [ngStyle]="{'transform' : tbCarouselTransform, 'transition' : tbTransition}">
+            <div class="common-card" *ngFor="let block of data; let i = index;" [ngStyle]="{'transform' : cssTransformStyleArr[i],
+                  'height': cardHeight, 'width': cardWidth, 'top':cardTop, 'left':cardLeft}" #commonCard>
+
+              <div *ngIf="dataType=='custom-component'">
+                <template #customComponent></template>
+              </div>
+              <div *ngIf="dataType=='image'">
+                <table id="wrapper" [ngStyle]="{'height' : heightOfBox, 'width' : widthOfBox, 'overflow': 'hidden',
+                    'margin':'0px', 'padding':'0px'}">
+                  <tr [ngStyle]="{'margin':'0px', 'padding':'0px'}">
+                    <td [ngStyle]="{'margin':'0px', 'padding':'0px'}">
+                      <img [src]="utility.sanitizeUrl(block)" alt="Image {{block}}" [ngStyle]="tbImageStyle">
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <div *ngIf="dataType=='text'" [ngStyle]="{ 'height' : cardHeight, 'width' : cardWidth}">
+                <h2 style="margin : 5px;">{{block.heading}}</h2>
+                <hr style="margin : 2px 20px;">
+                <p style="margin : 5px; overflow: hidden;">{{block.content}}</p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </td>
+    </tr>
+  </table>
+
+  <!-- Navigation arrows -->
+
+  <div class="arrow-parent-left" (click)="movePrevious()" (mouseover)="changeArrowColor()"
+    (mouseout)="changeArrowColorOut()" [ngStyle]="{'height' : arrowHeight, 'width' : arrowWidth, 'margin-top' : arrowTopMargin,
+    'display':showNav, 'opacity': navArrowOpacity}">
+    <div class="arrow">
+      <div class="line1 common-line" [ngStyle]="{'background-color' : arrowColorTemp, 'border' : arrowBorder}"></div>
+      <div class="line2 common-line" [ngStyle]="{'background-color' : arrowColorTemp, 'border' : arrowBorder}"></div>
+    </div>
+  </div>
+
+  <div class="arrow-parent-right" (click)="moveNext()" (mouseover)="changeArrowColor1()"
+    (mouseout)="changeArrowColorOut1()" [ngStyle]="{'height' : arrowHeight, 'width' : arrowWidth, 'margin-top' : arrowTopMargin,
+    'display':showNav, 'opacity': navArrowOpacity}">
+    <div class="arrow">
+      <div class="line1 common-line" [ngStyle]="{'background-color' : arrowColorTemp1, 'border' : arrowBorder1}"></div>
+      <div class="line2 common-line" [ngStyle]="{'background-color' : arrowColorTemp1, 'border' : arrowBorder1}"></div>
+    </div>
+  </div>
+
+</div>

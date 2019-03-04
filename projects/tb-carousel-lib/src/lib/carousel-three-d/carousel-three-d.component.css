@@ -1,0 +1,97 @@
+* {
+    box-sizing: border-box;
+}
+
+.scene {
+    margin: auto;
+    position: relative;
+    perspective: 1000px;
+}
+
+.tb-carousel {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+}
+
+.common-card {
+    position: absolute;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.tb-button-left {
+    z-index: 100;
+    position: absolute;
+    left: 5%;
+    top: 50%;
+}
+
+.tb-button-right {
+    z-index: 100;
+    position: absolute;
+    right: 5%;
+    top: 50%;
+}
+
+#image {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    vertical-align: middle;
+}
+
+#wrapper {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+#wrapper td {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.arrow-parent-left {
+    position: absolute;
+    z-index: 101;
+    top: 50%;
+    left: 0%;
+}
+
+.arrow-parent-right {
+    position: absolute;
+    z-index: 101;
+    top: 50%;
+    right: 0%;
+    transform: scaleX(-1);
+}
+
+.arrow {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.common-line {
+    border-radius: 100px;
+}
+
+.line1 {
+    position: absolute;
+    height: 65%;
+    width: 20%;
+    transform-origin: 50% 100%;
+    transform: rotate(45deg);
+    top: -10%;
+}
+
+.line2 {
+    top: -20%;
+    position: absolute;
+    height: 65%;
+    width: 20%;
+    transform-origin: 50% 100%;
+    transform: rotate(135deg);
+}

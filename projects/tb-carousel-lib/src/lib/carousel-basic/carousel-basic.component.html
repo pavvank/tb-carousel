@@ -1,0 +1,58 @@
+<div [ngStyle]="{'height' : containerHeight, 'width' : containerWidth, 'overflow':'hidden',
+  'position' : 'relative', 'margin':'auto', 'box-sizing': 'border-box'}" (mouseover)="pauseMethod()"
+  (mouseout)="resumeMethod()">
+
+  <div class="tb-carousel" [ngStyle]="{'height': heightOfBox, 'width':widthOfBox, 
+    'transform':rotateTransform, 'transition': tbTransition}">
+
+    <div class="common-card" *ngFor="let block of data; let i = index;"
+      [ngStyle]="{'z-index': cssStylesArray[i].zIndex, 'left': cssStylesArray[i].left,
+      'transform': cssStylesArray[i].scale, 'display' : cssStylesArray[i].display,
+      'height' : heightOfBox, 'width' : widthOfBox,
+      'top' : cssStylesArray[i].top}" #commonCard>
+
+      <div *ngIf="dataType=='custom-component'">
+        <template #customComponent></template>
+      </div>
+      <div *ngIf="dataType=='image'">
+        <table id="wrapper" [ngStyle]="{'height' : heightOfBox, 'width' : widthOfBox, 'overflow': 'hidden',
+        'margin':'0px', 'padding':'0px'}">
+          <tr [ngStyle]="{'margin':'0px', 'padding':'0px'}">
+            <td [ngStyle]="{'margin':'0px', 'padding':'0px'}">
+              <img [src]="utility.sanitizeUrl(block)" alt="Image {{block}}" [ngStyle]="tbImageStyle">
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div *ngIf="dataType=='text'" [ngStyle]="{ 'height' : heightOfBox, 'width' : widthOfBox,
+      'overflow': 'hidden'}">
+        <h2 style="margin : 5px;">{{block.heading}}</h2>
+        <hr style="margin : 2px 20px;">
+        <p style="margin : 5px; overflow: hidden;">{{block.content}}</p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Navigation arrows -->
+
+  <div class="arrow-parent-left" (click)="movePrevious()" (mouseover)="changeArrowColor()"
+    (mouseout)="changeArrowColorOut()" [ngStyle]="{'height' : arrowHeight, 'width' : arrowWidth, 'margin-top' : arrowTopMargin,
+    'display':showNav, 'opacity': navArrowOpacity}">
+    <div class="arrow">
+      <div class="line1 common-line" [ngStyle]="{'background-color' : arrowColorTemp, 'border' : arrowBorder}"></div>
+      <div class="line2 common-line" [ngStyle]="{'background-color' : arrowColorTemp, 'border' : arrowBorder}"></div>
+    </div>
+  </div>
+
+  <div class="arrow-parent-right" (click)="moveNext()" (mouseover)="changeArrowColor1()"
+    (mouseout)="changeArrowColorOut1()" [ngStyle]="{'height' : arrowHeight, 'width' : arrowWidth, 'margin-top' : arrowTopMargin,
+    'display':showNav, 'opacity': navArrowOpacity}">
+    <div class="arrow">
+      <div class="line1 common-line" [ngStyle]="{'background-color' : arrowColorTemp1, 'border' : arrowBorder1}"></div>
+      <div class="line2 common-line" [ngStyle]="{'background-color' : arrowColorTemp1, 'border' : arrowBorder1}"></div>
+    </div>
+  </div>
+
+</div>
