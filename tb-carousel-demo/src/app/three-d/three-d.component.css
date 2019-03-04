@@ -1,0 +1,12 @@
+.btn {
+    width: 100%;
+    margin: 2px;
+    border: 1px solid blue;
+    box-sizing: border-box;
+    border-radius: 0px;
+}
+
+.row {
+    margin: 0px;
+    padding: 0px;
+}

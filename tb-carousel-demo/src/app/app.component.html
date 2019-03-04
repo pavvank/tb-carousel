@@ -1,0 +1,22 @@
+<header style="height: 10vh;" class="bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="z-index: 100">
+    <a class="navbar-brand"><span style="color: white;font-weight: bolder">DEMO</span></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link" [routerLink]="'/basic'" [routerLinkActive]="'active'">Basic</a>
+        <a class="nav-item nav-link" [routerLink]="'/stacked-card'" [routerLinkActive]="'active'">Stacked Card</a>
+        <a class="nav-item nav-link" [routerLink]="'/3d'" [routerLinkActive]="'active'">3-D</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="content" style="height: 85vh;">
+  <router-outlet></router-outlet>
+</div>
+<footer style="height: 5vh;text-align: center;" class="bg-dark">
+  <span style="color:white;font-weight: bolder;">Learnzzy | TB</span>
+</footer>
