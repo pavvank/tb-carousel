@@ -60,7 +60,8 @@
             "styles": [
               "projects/tb-carousel-example/src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+            ]
           },
           "configurations": {
             "production": {

@@ -1,6 +1,6 @@
 {
   "name": "tb-carousel-lib",
-  "version": "1.1.0",
+  "version": "1.3.1",
   "description": "A collection of carousels for Angular based application",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,7 +9,7 @@
     "type": "git",
     "url": "https://github.com/pavvank/tb-carousel.git"
   },
-  "keywords": ["Angular", "Carousel"],
+  "keywords": ["Angular", "Carousel", "3D Carousel"],
   "author": "Pavan Kumar",
   "license": "MIT",
   "bugs": {
