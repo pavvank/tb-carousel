@@ -6,6 +6,10 @@
   
 ## Demo of tb-carousel can be seen at
 #### **https://pavvank.github.io/tb-carousel**
+<<<<<<< HEAD
+=======
+  
+>>>>>>> 8c1fa351ca495100e964e74bbcc6c842cd166627
 ---
 ### **Features!**
 
